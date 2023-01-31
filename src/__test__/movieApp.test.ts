@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { funktionen som önskas } from './../ts/movieApp';
+import { init } from './../ts/movieApp';
 
 beforeEach (() => {
     document.body.innerHTML="";

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { movieSort } from './../ts/functions';
+import { getData } from './../ts/services/movieservice';
 
 beforeEach (() => {
     document.body.innerHTML="";
