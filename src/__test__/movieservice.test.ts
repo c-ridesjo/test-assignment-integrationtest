@@ -3,12 +3,27 @@
  */
 
 import { IMovie } from './../ts/models/Movie';
+import { getData } from './../ts/services/movieservice';
 
 beforeEach (() => {
     document.body.innerHTML="";
 });
 
-const movies: IMovie[] = [
+test ("should get data correctly", async() => {
+    let data = await getData ("test")
+}),
+
+test ("should get error getting data", async() => {
+    try {
+        let data = await getData ("error");
+    }
+    catch (error:any) {
+        expect (error.lenght).toBe(0);
+    }
+});
+
+
+/*const movies: IMovie[] = [
     {
         Title: "Men in black",
         imdbID: "tt0119654",
@@ -34,7 +49,7 @@ const movies: IMovie[] = [
 
 jest.mock("axios", () => ({
     get: async (url: string) => {
-        return new Promise((resolve, reject) => {
+        return new Promise ((resolve, reject) => {
             if (url.endsWith("error")) {
                 reject([]);
             }
@@ -44,3 +59,5 @@ jest.mock("axios", () => ({
         });
     }
 }));
+*/
+
