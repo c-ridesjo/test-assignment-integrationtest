@@ -9,11 +9,11 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-test ("should get data correctly", async() => {
+test ("should get data correctly", async() => {                 // Test 1
     let data = await getData ("test")
 }),
 
-test ("should get error getting data", async() => {
+test ("should get error getting data", async() => {             // Test 2
     try {
         let data = await getData ("error");
     }
@@ -27,27 +27,27 @@ test ("should get error getting data", async() => {
     {
         Title: "Men in black",
         imdbID: "tt0119654",
-        Type: "movie",
+        Type: "science fiction",
         Poster: "...",
         Year: "1997",
     },
     {
         Title: "Men in black II",
         imdbID: "tt0120912",
-        Type: "movie",
+        Type: "science fiction",
         Poster: "...",
         Year: "2002",
     },
     {
         Title: "Men in black 3",
         imdbID: "tt1409024",
-        Type: "movie",
+        Type: "science fiction",
         Poster: "...",
         Year: "2012",
     },
 ];
 
-jest.mock("axios", () => ({
+jest.mock("axios", () => ({                             
     get: async (url: string) => {
         return new Promise ((resolve, reject) => {
             if (url.endsWith("error")) {

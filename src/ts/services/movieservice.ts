@@ -11,4 +11,4 @@ export const getData = async (searchText: string): Promise <IMovie[]> => {
     .catch(() => {
       return [];
     });
-};
+};                        // mockas då det är en tjänst
