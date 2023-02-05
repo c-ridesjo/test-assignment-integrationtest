@@ -4,14 +4,14 @@
 
 import { IMovie } from './../ts/models/Movie';
 import { getData } from './../ts/services/movieservice';
+import * as movieApp from './../ts/movieApp';
+import * as movieservice from './../ts/services/movieservice';
 
-//jest.mock("./../ts/services/movieservice");
-
-/*beforeEach (() => {
+beforeEach (() => {
     document.body.innerHTML="";
-});*/
+});
 
-/*jest.mock("axios", () => ({                       // Mocka axios i __mock__ (Länk till mock i övriga testfiler)                 
+jest.mock("axios", () => ({                       // Mocka axios i __mock__ (Länk till mock i övriga testfiler)                 
     get: async (url: string) => {
         return new Promise ((resolve, reject) => {
             if (!url.endsWith("error")) {
@@ -22,7 +22,7 @@ import { getData } from './../ts/services/movieservice';
             }
         });
     },
-}));*/
+}));
 
 const movies: IMovie[] = [
 {
@@ -85,4 +85,27 @@ test ("should get error getting data", async() => {             // Test 2 - fung
     //Assert
         expect (data).toBe(undefined);
 }); 
+
+test ("should call getData correctly", async () => {
+
+    //Arrange
+    document.body.innerHTML = ` 
+    <form id="searchForm">
+        <input type="text" id="searchText" placeholder="Skriv titel här" />
+        <button type="submit" id="search>Sök</button>"
+    </form>
+    <div id="movie-container"></div>
+    `;
+
+    const searchText = document.getElementById("searchText") as HTMLInputElement;
+    searchText.value = "Men in black";
+    const getDataSpy = jest.spyOn(movieservice, "getData").mockReturnValue(Promise.resolve([]));
+
+    //Act
+    await movieApp.handleSubmit();
+
+    //Assert
+    expect(getDataSpy).toBeCalledWith("Men in black");
+    getDataSpy.mockRestore();
+});
 

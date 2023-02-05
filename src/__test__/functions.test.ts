@@ -6,9 +6,9 @@ import { movieSort } from './../ts/functions';
 import { IMovie } from './../ts/models/Movie';
 //import { movies } from "./../ts/services/__mocks__/serviceMock";
 
-/*beforeEach (() => {
+beforeEach (() => {
     document.body.innerHTML="";
-});*/
+});
 
 test ("should sort movies by title", () => {
     //Arrange
@@ -28,7 +28,7 @@ test ("should sort movies by title", () => {
             Year: "2002",
         },
         {
-            Title: "Men in black 3",
+            Title: "Men in black III",
             imdbID: "tt1409024",
             Type: "movie",
             Poster: "N/A",
@@ -42,7 +42,7 @@ test ("should sort movies by title", () => {
     //Assert
     expect(result[0].Title).toBe("Men in black");
     expect(result[1].Title).toBe("Men in black II");
-    expect(result[2].Title).toBe("Men in black 3");
+    expect(result[2].Title).toBe("Men in black III");
 });
 
 test ("should sort movies by title, descending", () => {
@@ -64,7 +64,7 @@ test ("should sort movies by title, descending", () => {
             Year: "2002",
         },
         {
-            Title: "Men in black 3",
+            Title: "Men in black III",
             imdbID: "tt1409024",
             Type: "movie",
             Poster: "N/A",
@@ -76,7 +76,7 @@ test ("should sort movies by title, descending", () => {
     const result = movieSort(movies, false);
 
     //Assert
-    expect(result[0].Title).toBe("Men in black 3");
+    expect(result[0].Title).toBe("Men in black III");
     expect(result[1].Title).toBe("Men in black II");
     expect(result[2].Title).toBe("Men in black");
 });
