@@ -28,11 +28,11 @@ beforeEach (() => {
 
 jest.mock("./../ts/services/movieservice.ts");
 
-test ("should reject when input field is empty", async () => {                        // Test 4
+test ("should reject when input field is empty", async () => {                        // Test 
     await expect(getData()).rejects.toThrowError("Something went wrong");
 });
 
-test ("should return false (mock) movie", async () => {                               // Test 5
+test ("should return false (mock) movie", async () => {                               // Test 
     expect(await getData()).toEqual([
         {
             Title: "Titanic",
@@ -44,7 +44,7 @@ test ("should return false (mock) movie", async () => {                         
     ]);    
 });
 
-test("should call handleSubmit when form is submitted", () => {
+test("should call handleSubmit when form is submitted", () => {                         // Test
     
     //Arrange
     document.body.innerHTML = ` 
@@ -70,7 +70,7 @@ test("should call handleSubmit when form is submitted", () => {
    // expect(form).toBe([]);
 });
 
-test ("should call createHtml correctly", async () => {
+test ("should call createHtml correctly", async () => {                         // Test
 
     //Arrange
     const movies: IMovie[] = [
@@ -94,7 +94,7 @@ test ("should call createHtml correctly", async () => {
     expect(container.innerHTML).toContain("Men in black");
 });
 
-test ("should call createHtml if movies are found", async () => {
+test ("should call createHtml if movies are found", async () => {                       // Test
 
     //Arrange
     document.body.innerHTML = ` 
@@ -129,7 +129,7 @@ test ("should call createHtml if movies are found", async () => {
     createHtmlMock.mockRestore();
 });
 
-test ("should call displayNoResult if movies are not found", async () => {
+test ("should call displayNoResult if movies are not found", async () => {          // Test
 
     //Arrange
     document.body.innerHTML = ` 
@@ -153,7 +153,7 @@ test ("should call displayNoResult if movies are not found", async () => {
     displayNoResultMock.mockRestore();
 });
 
-test ("should display message", async () => {
+test ("should display message", async () => {                                   // Test
 
     //Arrange
     document.body.innerHTML = `<div id="movie-container"></div>`;

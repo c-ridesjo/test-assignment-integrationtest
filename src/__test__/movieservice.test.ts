@@ -11,7 +11,7 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-jest.mock("axios", () => ({                       // Mocka axios i __mock__ (Länk till mock i övriga testfiler)                 
+jest.mock("axios", () => ({                                        
     get: async (url: string) => {
         return new Promise ((resolve, reject) => {
             if (!url.endsWith("error")) {
@@ -61,7 +61,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-test ("should get data correctly", async() => {                 // Test 1 - fungerar
+test ("should get data correctly", async() => {                 // Test     - fungerar
     // Arrange
     let searchTitle = "Men in black";
         
@@ -74,7 +74,7 @@ test ("should get data correctly", async() => {                 // Test 1 - fung
     //console.log("found data: " + data[0].imdbID + "  expected data: " + movies[0].imdbID);
 });
 
-test ("should get error getting data", async() => {             // Test 2 - fungerar
+test ("should get error getting data", async() => {             // Test      - fungerar
     //Arrange
        const myList: IMovie[] = [];
 
@@ -86,7 +86,7 @@ test ("should get error getting data", async() => {             // Test 2 - fung
         expect (data).toBe(undefined);
 }); 
 
-test ("should call getData correctly", async () => {
+test ("should call getData correctly", async () => {            // Test
 
     //Arrange
     document.body.innerHTML = ` 
