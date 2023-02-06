@@ -4,13 +4,13 @@
 
 import { movieSort } from './../ts/functions';
 import { IMovie } from './../ts/models/Movie';
-//import { movies } from "./../ts/services/__mocks__/serviceMock";
 
 beforeEach (() => {
     document.body.innerHTML="";
 });
 
 test ("should sort movies by title", () => {   
+    
     //Arrange
     const movies: IMovie[] = [
         {

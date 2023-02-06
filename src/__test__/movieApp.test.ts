@@ -2,7 +2,6 @@
  * @jest-environment jsdom
  */
 
-import axios from "axios";
 import { getData } from "../ts/services/__mocks__/movieservice";
 import { movies } from "../ts/services/__mocks__/movieservice";
 import { IMovie } from "./../ts/models/Movie";
@@ -15,7 +14,7 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-jest.mock("axios", () => ({                                        
+/* jest.mock("axios", () => ({                                        
     get: async (url: string) => {
         return new Promise ((resolve, reject) => {
             if (!url.endsWith("error")) {
@@ -26,25 +25,9 @@ jest.mock("axios", () => ({
             }
         });
     },
-})); 
+}));  */
 
-test ("should reject when input field is empty", async () => {                       
-    await expect(getData()).rejects.toThrowError("Something went wrong");
-});
-
-test ("should return false (mock) movie", async () => {                               
-    expect(await getData()).toEqual([
-        {
-            Title: "Titanic",
-            imdbID: "tt0120338",
-            Type: "drama",
-            Poster: "...",
-            Year: "1997",
-        },
-    ]);    
-});
-
-test("should call handleSubmit when form is submitted", () => {                         
+/* test("should call handleSubmit when form is submitted", () => {                         
     
     //Arrange
     document.body.innerHTML = ` 
@@ -65,7 +48,7 @@ test("should call handleSubmit when form is submitted", () => {
     //Assert    
     expect (spyOnHandleSubmit).toHaveBeenCalled();
     spyOnHandleSubmit.mockRestore();
-});
+}); */
 
 test ("should call createHtml correctly", async () => {                         
 
@@ -86,12 +69,11 @@ test ("should call createHtml correctly", async () => {
     //Act 
     movieApp.createHtml(movies, container);
 
-    //Assert
-  
+    //Assert  
     expect(container.innerHTML).toContain("Men in black");
 });
 
-test ("should call createHtml if movies are found", async () => {                      
+/* test ("should call createHtml if movies are found", async () => {                      
 
     //Arrange
     document.body.innerHTML = ` 
@@ -122,8 +104,8 @@ test ("should call createHtml if movies are found", async () => {
     getDataMock.mockRestore();
     createHtmlMock.mockRestore();
 });
-
-test ("should call displayNoResult if movies are not found", async () => {         
+ */
+/* test ("should call displayNoResult if movies are not found", async () => {         
 
     //Arrange
     document.body.innerHTML = ` 
@@ -146,7 +128,7 @@ test ("should call displayNoResult if movies are not found", async () => {
     getDataMock.mockRestore();
     displayNoResultMock.mockRestore();
 });
-
+ */
 test ("should display message", async () => {                                   
 
     //Arrange

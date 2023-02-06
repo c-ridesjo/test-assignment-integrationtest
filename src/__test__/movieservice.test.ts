@@ -27,7 +27,7 @@ const movies: IMovie[] = [
         Year: "2002",
     },
     {
-        Title: "Men in black 3",
+        Title: "Men in black III",
         imdbID: "tt1409024",
         Type: "movie",
         Poster: "N/A",
@@ -48,30 +48,16 @@ jest.mock("axios", () => ({
     },
 }));
 
-test ("should get data correctly", async() => {                 //  fungerar
+test ("should get data correctly", async() => {               
     // Arrange
     const searchTitle = "Men in black";
         
     // Act
-    const data = await getData (searchTitle);
-  //  console.log(data);
+    let data = await getData (searchTitle);
 
     //Assert
-    expect(data[0].imdbID).toBe(movies[0].imdbID);         // Testar att ID:t stämmer och att jag fått rätt resultat
-    //console.log("found data: " + data[0].imdbID + "  expected data: " + movies[0].imdbID);
+    expect(data[0].imdbID).toBe(movies[0].imdbID);       
 });
-
-test ("should get error getting data", async() => {             //  fungerar
-    //Arrange
-       const myList: IMovie[] = [];
-
-    //Act
-        let data = await getData ("");
-        console.log("det här är den data jag fick" + data);
-
-    //Assert
-        expect (data).toBe(undefined);
-}); 
 
 test ("should get error getting data", async() => { 
     try {
