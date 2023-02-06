@@ -11,41 +11,28 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-jest.mock("axios", () => ({                                        
-    get: async (url: string) => {
-        return new Promise ((resolve, reject) => {
-            if (!url.endsWith("error")) {
-                resolve({data: { Search: movies } });
-            }
-            else {
-                reject ([{}]);
-            }
-        });
-    },
-}));
-
 const movies: IMovie[] = [
-{
-    Title: "Men in black",
-    imdbID: "tt0119654",
-    Type: "movie",
-    Poster: "N/A",
-    Year: "1997",
-},
-{
-    Title: "Men in black II",
-    imdbID: "tt0120912",
-    Type: "movie",
-    Poster: "N/A",
-    Year: "2002",
-},
-{
-    Title: "Men in black 3",
-    imdbID: "tt1409024",
-    Type: "movie",
-    Poster: "N/A",
-    Year: "2012",
-},
+    {
+        Title: "Men in black",
+        imdbID: "tt0119654",
+        Type: "movie",
+        Poster: "N/A",
+        Year: "1997",
+    },
+    {
+        Title: "Men in black II",
+        imdbID: "tt0120912",
+        Type: "movie",
+        Poster: "N/A",
+        Year: "2002",
+    },
+    {
+        Title: "Men in black 3",
+        imdbID: "tt1409024",
+        Type: "movie",
+        Poster: "N/A",
+        Year: "2012",
+    },
 ];
 
 jest.mock("axios", () => ({                                        
@@ -61,12 +48,12 @@ jest.mock("axios", () => ({
     },
 }));
 
-test ("should get data correctly", async() => {                 // Test     - fungerar
+test ("should get data correctly", async() => {                 //  fungerar
     // Arrange
-    let searchTitle = "Men in black";
+    const searchTitle = "Men in black";
         
     // Act
-    let data = await getData (searchTitle);
+    const data = await getData (searchTitle);
   //  console.log(data);
 
     //Assert
@@ -74,7 +61,7 @@ test ("should get data correctly", async() => {                 // Test     - fu
     //console.log("found data: " + data[0].imdbID + "  expected data: " + movies[0].imdbID);
 });
 
-test ("should get error getting data", async() => {             // Test      - fungerar
+test ("should get error getting data", async() => {             //  fungerar
     //Arrange
        const myList: IMovie[] = [];
 
@@ -86,7 +73,16 @@ test ("should get error getting data", async() => {             // Test      - f
         expect (data).toBe(undefined);
 }); 
 
-test ("should call getData correctly", async () => {            // Test
+test ("should get error getting data", async() => { 
+    try {
+        let data = await getData("error");
+    }
+    catch { (error: any) => {
+        expect (error.length).toBe(0);
+    }
+}});
+
+test ("should call getData correctly", async () => {            
 
     //Arrange
     document.body.innerHTML = ` 

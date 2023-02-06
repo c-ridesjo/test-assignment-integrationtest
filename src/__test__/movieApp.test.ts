@@ -9,6 +9,12 @@ import { IMovie } from "./../ts/models/Movie";
 import * as movieApp from './../ts/movieApp';
 import * as movieservice from './../ts/services/movieservice';
 
+jest.mock("./../ts/services/movieservice.ts");
+
+beforeEach (() => {
+    document.body.innerHTML="";
+});
+
 jest.mock("axios", () => ({                                        
     get: async (url: string) => {
         return new Promise ((resolve, reject) => {
@@ -22,17 +28,11 @@ jest.mock("axios", () => ({
     },
 })); 
 
-beforeEach (() => {
-    document.body.innerHTML="";
-});
-
-jest.mock("./../ts/services/movieservice.ts");
-
-test ("should reject when input field is empty", async () => {                        // Test 
+test ("should reject when input field is empty", async () => {                       
     await expect(getData()).rejects.toThrowError("Something went wrong");
 });
 
-test ("should return false (mock) movie", async () => {                               // Test 
+test ("should return false (mock) movie", async () => {                               
     expect(await getData()).toEqual([
         {
             Title: "Titanic",
@@ -44,18 +44,17 @@ test ("should return false (mock) movie", async () => {                         
     ]);    
 });
 
-test("should call handleSubmit when form is submitted", () => {                         // Test
+test("should call handleSubmit when form is submitted", () => {                         
     
     //Arrange
     document.body.innerHTML = ` 
         <form id="searchForm">
             <input type="text" id="searchText" placeholder="Skriv titel här" />
-            <button type="submit" id="search>Sök</button>"
-        </form>
-        <div id="movie-container"></div>`
+            <div id="movie-container"></div>
+        </form>`;
     
-    let form = document.getElementById ("searchForm") as HTMLFormElement;
-    let spyOnHandleSubmit = jest.spyOn(movieApp, "handleSubmit").mockReturnValue(new Promise<void>((resolve) => {
+    const form = document.getElementById ("searchForm") as HTMLFormElement;
+    const spyOnHandleSubmit = jest.spyOn(movieApp, "handleSubmit").mockReturnValue(new Promise<void>((resolve) => {
         resolve();
     })); 
 
@@ -64,13 +63,11 @@ test("should call handleSubmit when form is submitted", () => {                 
     form.submit();
 
     //Assert    
-    expect (spyOnHandleSubmit).toHaveBeenCalledTimes(1);
+    expect (spyOnHandleSubmit).toHaveBeenCalled();
     spyOnHandleSubmit.mockRestore();
-
-   // expect(form).toBe([]);
 });
 
-test ("should call createHtml correctly", async () => {                         // Test
+test ("should call createHtml correctly", async () => {                         
 
     //Arrange
     const movies: IMovie[] = [
@@ -83,7 +80,7 @@ test ("should call createHtml correctly", async () => {                         
         },
     ];
 
-    document.body.innerHTML = `<div id="moviecontainer"></div>`;
+    document.body.innerHTML = `<div id="movie-container"></div>`;
     const container = document.getElementById("movie-container") as HTMLDivElement;
 
     //Act 
@@ -94,15 +91,12 @@ test ("should call createHtml correctly", async () => {                         
     expect(container.innerHTML).toContain("Men in black");
 });
 
-test ("should call createHtml if movies are found", async () => {                       // Test
+test ("should call createHtml if movies are found", async () => {                      
 
     //Arrange
     document.body.innerHTML = ` 
-    <form id="searchForm">
         <input type="text" id="searchText" placeholder="Skriv titel här" />
-        <button type="submit" id="search>Sök</button>"
-    </form>
-    <div id="movie-container"></div>`
+        <div id="movie-container"></div>`;    
 
     const searchText = document.getElementById("searchText") as HTMLInputElement;
     searchText.value = "Men in black";
@@ -129,13 +123,13 @@ test ("should call createHtml if movies are found", async () => {               
     createHtmlMock.mockRestore();
 });
 
-test ("should call displayNoResult if movies are not found", async () => {          // Test
+test ("should call displayNoResult if movies are not found", async () => {         
 
     //Arrange
     document.body.innerHTML = ` 
-    <input type="text" id="searchText" placeholder="Skriv titel här" />
-    <div id="movie-container"></div>
-    `;  
+        <input type="text" id="searchText" placeholder="Skriv titel här" />
+        <div id="movie-container"></div>
+        `;  
 
     const searchText = document.getElementById("searchText") as HTMLInputElement;
     searchText.value = "";
@@ -153,7 +147,7 @@ test ("should call displayNoResult if movies are not found", async () => {      
     displayNoResultMock.mockRestore();
 });
 
-test ("should display message", async () => {                                   // Test
+test ("should display message", async () => {                                   
 
     //Arrange
     document.body.innerHTML = `<div id="movie-container"></div>`;

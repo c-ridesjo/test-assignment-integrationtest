@@ -10,7 +10,7 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-test ("should sort movies by title", () => {                    // Test
+test ("should sort movies by title", () => {   
     //Arrange
     const movies: IMovie[] = [
         {
@@ -45,7 +45,7 @@ test ("should sort movies by title", () => {                    // Test
     expect(result[2].Title).toBe("Men in black III");
 });
 
-test ("should sort movies by title, descending", () => {                // Test
+test ("should sort movies by title, descending", () => {            
 
     //Arrange
     const movies: IMovie[] = [
