@@ -14,42 +14,6 @@ beforeEach (() => {
     document.body.innerHTML="";
 });
 
-/* jest.mock("axios", () => ({                                        
-    get: async (url: string) => {
-        return new Promise ((resolve, reject) => {
-            if (!url.endsWith("error")) {
-                resolve({data: { Search: movies } });
-            }
-            else {
-                reject ();
-            }
-        });
-    },
-}));  */
-
-/* test("should call handleSubmit when form is submitted", () => {                         
-    
-    //Arrange
-    document.body.innerHTML = ` 
-        <form id="searchForm">
-            <input type="text" id="searchText" placeholder="Skriv titel här" />
-            <div id="movie-container"></div>
-        </form>`;
-    
-    const form = document.getElementById ("searchForm") as HTMLFormElement;
-    const spyOnHandleSubmit = jest.spyOn(movieApp, "handleSubmit").mockReturnValue(new Promise<void>((resolve) => {
-        resolve();
-    })); 
-
-    //Act
-    movieApp.init();
-    form.submit();
-
-    //Assert    
-    expect (spyOnHandleSubmit).toHaveBeenCalled();
-    spyOnHandleSubmit.mockRestore();
-}); */
-
 test ("should call createHtml correctly", async () => {                         
 
     //Arrange
@@ -73,7 +37,7 @@ test ("should call createHtml correctly", async () => {
     expect(container.innerHTML).toContain("Men in black");
 });
 
-/* test ("should call createHtml if movies are found", async () => {                      
+test ("should call createHtml if movies are found", async () => {                      
 
     //Arrange
     document.body.innerHTML = ` 
@@ -83,29 +47,18 @@ test ("should call createHtml correctly", async () => {
     const searchText = document.getElementById("searchText") as HTMLInputElement;
     searchText.value = "Men in black";
     const createHtmlMock = jest.spyOn(movieApp, "createHtml");
-    const movies: IMovie[] = [
-        {
-            Title: "Men in black",
-            imdbID: "tt0119654",
-            Type: "movie",
-            Poster: "N/A",
-            Year: "1997",
-        },
-    ];
-    const getDataMock = jest.spyOn(movieservice, "getData").mockReturnValue(Promise.resolve(movies));
-
+   
     //Act
     await movieApp.handleSubmit();
 
     //Assert
-    expect(getDataMock).toBeCalledTimes(1);
     expect(createHtmlMock).toBeCalledTimes(1);
+    expect(createHtmlMock).toBeCalledWith(movies);
 
-    getDataMock.mockRestore();
     createHtmlMock.mockRestore();
 });
- */
-/* test ("should call displayNoResult if movies are not found", async () => {         
+ 
+test ("should call displayNoResult if movies are not found", async () => {         
 
     //Arrange
     document.body.innerHTML = ` 
@@ -115,20 +68,18 @@ test ("should call createHtml correctly", async () => {
 
     const searchText = document.getElementById("searchText") as HTMLInputElement;
     searchText.value = "";
-    const getDataMock = jest.spyOn(movieservice, "getData"). mockReturnValue(Promise.reject());
     const displayNoResultMock = jest.spyOn(movieApp, "displayNoResult");
 
     //Act
     await movieApp.handleSubmit();
 
     //Assert
-    expect(getDataMock).toBeCalledTimes(1);
+   
     expect(displayNoResultMock).toBeCalledTimes(1);
 
-    getDataMock.mockRestore();
     displayNoResultMock.mockRestore();
 });
- */
+ 
 test ("should display message", async () => {                                   
 
     //Arrange
